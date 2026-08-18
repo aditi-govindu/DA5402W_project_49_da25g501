@@ -2,29 +2,29 @@
   "baseline_model": {
     "model": "baseline_tfidf_logistic_regression",
     "val_metrics": {
-      "accuracy": 1.0,
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1_score": 1.0,
-      "roc_auc": 1.0
+      "accuracy": 0.9777777777777777,
+      "precision": 0.9736842105263158,
+      "recall": 0.9823008849557522,
+      "f1_score": 0.9779735682819384,
+      "roc_auc": 0.9722266118836915
     },
     "test_metrics": {
-      "accuracy": 1.0,
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1_score": 1.0,
-      "roc_auc": 1.0
+      "accuracy": 0.9422222222222222,
+      "precision": 0.9459459459459459,
+      "recall": 0.9375,
+      "f1_score": 0.9417040358744395,
+      "roc_auc": 0.9389222503160557
     }
   },
   "pytorch_model": {
     "model": "pytorch_bilstm_attention",
-    "val_f1": 1.0,
+    "val_f1": 0.9779735682819384,
     "test_metrics": {
-      "accuracy": 1.0,
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1_score": 1.0,
-      "roc_auc": 1.0
+      "accuracy": 0.9422222222222222,
+      "precision": 0.9459459459459459,
+      "recall": 0.9375,
+      "f1_score": 0.9417040358744395,
+      "roc_auc": 0.9397123893805309
     }
   }
 }
