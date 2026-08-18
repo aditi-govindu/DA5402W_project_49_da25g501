@@ -6,23 +6,26 @@ import pytest
 from fastapi.testclient import TestClient
 from src.api.app import app
 
-client = TestClient(app)
+@pytest.fixture(scope="module")
+def client():
+    with TestClient(app) as test_client:
+        yield test_client
 
-def test_root_endpoint():
+def test_root_endpoint(client):
     response = client.get("/")
     assert response.status_code == 200
     data = response.json()
     assert "project" in data
     assert data["status"] == "online"
 
-def test_health_endpoint():
+def test_health_endpoint(client):
     response = client.get("/health")
     assert response.status_code == 200
     data = response.json()
     assert "status" in data
     assert "version" in data
 
-def test_predict_endpoint():
+def test_predict_endpoint(client):
     payload = {
         "text": "Artificial intelligence and machine learning models are transforming text generation across the globe."
     }
@@ -35,7 +38,7 @@ def test_predict_endpoint():
     assert "lexical_features" in data
     assert "latency_ms" in data
 
-def test_batch_predict_endpoint():
+def test_batch_predict_endpoint(client):
     payload = {
         "texts": [
             "This is an article written by a human reporter.",
@@ -48,7 +51,7 @@ def test_batch_predict_endpoint():
     assert data["total_processed"] == 2
     assert len(data["predictions"]) == 2
 
-def test_metrics_endpoint():
+def test_metrics_endpoint(client):
     response = client.get("/metrics")
     assert response.status_code == 200
     assert "http_requests_total" in response.text

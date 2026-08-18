@@ -9,7 +9,7 @@ Calculates statistical drift between reference (training) distribution and produ
 import os
 import json
 import argparse
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 import numpy as np
 import pandas as pd
 from scipy import stats

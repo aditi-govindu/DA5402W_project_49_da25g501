@@ -1,0 +1,63 @@
+{
+  "num_incoming_samples": 150,
+  "feature_drift_summary": {
+    "overall_feature_drift": false,
+    "feature_details": {
+      "char_length": {
+        "ks_statistic": 0.02666666666666667,
+        "p_value": 0.9999791389188297,
+        "drift_detected": false,
+        "reference_mean": 147.24,
+        "current_mean": 147.44,
+        "reference_std": 6.149527275676214,
+        "current_std": 6.274264897181183
+      },
+      "word_count": {
+        "ks_statistic": 0.012857142857142857,
+        "p_value": 1.0,
+        "drift_detected": false,
+        "reference_mean": 26.27285714285714,
+        "current_mean": 26.266666666666666,
+        "reference_std": 1.3695068380960485,
+        "current_std": 1.3399834161494524
+      },
+      "avg_word_length": {
+        "ks_statistic": 0.0419047619047619,
+        "p_value": 0.9755800589971133,
+        "drift_detected": false,
+        "reference_mean": 4.4597279815787205,
+        "current_mean": 4.46823108594258,
+        "reference_std": 0.24353131238746248,
+        "current_std": 0.24547049190533612
+      },
+      "lexical_diversity": {
+        "ks_statistic": 0.039523809523809524,
+        "p_value": 0.9864599646123435,
+        "drift_detected": false,
+        "reference_mean": 0.8532427648159174,
+        "current_mean": 0.8582044461285839,
+        "reference_std": 0.0690226785206447,
+        "current_std": 0.07085990848183531
+      },
+      "punctuation_count": {
+        "ks_statistic": 0.0,
+        "p_value": 1.0,
+        "drift_detected": false,
+        "reference_mean": 2.0,
+        "current_mean": 2.0,
+        "reference_std": 0.0,
+        "current_std": 0.0
+      },
+      "uppercase_ratio": {
+        "ks_statistic": 0.07142857142857142,
+        "p_value": 0.5310579850213079,
+        "drift_detected": false,
+        "reference_mean": 0.035584074312288466,
+        "current_mean": 0.0341687580661167,
+        "reference_std": 0.014226054793288919,
+        "current_std": 0.013469645731644993
+      }
+    }
+  },
+  "overall_drift_detected": false
+}

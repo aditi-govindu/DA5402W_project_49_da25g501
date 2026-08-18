@@ -1,3 +1,5 @@
+export PYTHONPATH := $(CURDIR):$(PYTHONPATH)
+
 .PHONY: help install ingest preprocess train evaluate drift test lint docker-build docker-up docker-down airflow mlflow clean
 
 help:
