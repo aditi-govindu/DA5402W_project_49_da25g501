@@ -1,0 +1,72 @@
+# Central Configuration for MLOps AI vs Human News Classification Pipeline
+
+project:
+  name: "ai-vs-human-news-classification"
+  version: "1.0.0"
+  description: "End-to-end MLOps pipeline for classifying news text as AI-generated or Human-written"
+
+data:
+  raw_path: "data/raw/ai_vs_human_text.csv"
+  processed_dir: "data/processed"
+  train_path: "data/processed/train.parquet"
+  val_path: "data/processed/val.parquet"
+  test_path: "data/processed/test.parquet"
+  target_col: "label"
+  text_col: "text"
+  id_col: "id"
+  train_split: 0.70
+  val_split: 0.15
+  test_split: 0.15
+  random_state: 42
+
+spark:
+  app_name: "AI-vs-Human-Text-Spark-Preprocess"
+  master: "local[*]"
+  log_level: "WARN"
+  min_token_length: 2
+  tfidf_max_features: 5000
+
+models:
+  baseline:
+    name: "tfidf_logistic_regression"
+    max_iter: 1000
+    c_param: 1.0
+    tfidf_max_features: 5000
+    ngram_range: [1, 2]
+    artifact_path: "models/baseline_model.pkl"
+    tfidf_path: "models/tfidf_vectorizer.pkl"
+
+  pytorch_bilstm:
+    name: "bilstm_attention_classifier"
+    vocab_size: 10000
+    max_seq_len: 256
+    embedding_dim: 128
+    hidden_dim: 128
+    num_layers: 2
+    bidirectional: true
+    dropout: 0.3
+    batch_size: 32
+    learning_rate: 0.001
+    epochs: 10
+    weight_decay: 0.0001
+    artifact_path: "models/pytorch_bilstm.pt"
+    vocab_path: "models/vocab.json"
+    metrics_path: "models/metrics.json"
+
+mlflow:
+  tracking_uri: "sqlite:///mlruns.db"
+  experiment_name: "ai-vs-human-news-classification"
+  artifact_location: "./mlruns"
+
+monitoring:
+  drift_threshold_pvalue: 0.05
+  ks_stat_threshold: 0.10
+  report_json_path: "reports/drift_report.json"
+  report_html_path: "reports/drift_report.html"
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+  title: "AI vs Human News Classifier API"
+  version: "1.0.0"
+  model_type: "pytorch"  # 'pytorch' or 'baseline'

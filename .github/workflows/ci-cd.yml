@@ -1,0 +1,120 @@
+name: MLOps CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  # 1. Code Quality & Linting
+  lint:
+    name: Code Quality & Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install Linting Tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 black
+
+      - name: Run Black Code Formatting Check
+        run: |
+          black --check --line-length 120 src/ tests/ || true
+
+      - name: Run Flake8 Linter
+        run: |
+          flake8 src/ tests/ --count --select=E9,F63,F7,F82 --show-source --statistics
+          flake8 src/ tests/ --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics
+
+  # 2. Unit and Integration Testing
+  test:
+    name: Unit & Integration Tests
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Pytest Suite with Coverage
+        run: |
+          pytest --cov=src --cov-report=term-missing tests/
+
+  # 3. End-to-End Pipeline Dry Run
+  pipeline-validation:
+    name: E2E Pipeline Validation
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Ingest & Preprocess Data
+        run: |
+          python src/data/ingest.py
+          python src/data/preprocess.py
+
+      - name: Train Models & Log to MLflow
+        run: |
+          python src/models/train.py
+
+      - name: Evaluate Models & Generate Reports
+        run: |
+          python src/models/evaluate.py
+
+      - name: Run Drift Detection Check
+        run: |
+          python src/monitoring/drift_detector.py
+
+      - name: Upload Evaluation Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: evaluation-and-drift-reports
+          path: reports/
+
+  # 4. Docker Build & Smoke Test
+  docker-build:
+    name: Docker Build & Smoke Test
+    runs-on: ubuntu-latest
+    needs: pipeline-validation
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Build Docker Image
+        run: |
+          docker build -t ai-news-classifier:latest -f Dockerfile .
+
+      - name: Run Container & Test Health Check
+        run: |
+          docker run -d -p 8000:8000 --name test_app ai-news-classifier:latest
+          sleep 10
+          curl --fail http://localhost:8000/health || exit 1
+          docker stop test_app

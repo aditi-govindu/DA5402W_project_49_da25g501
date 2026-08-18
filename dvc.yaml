@@ -1,0 +1,66 @@
+stages:
+  ingest:
+    cmd: python3 src/data/ingest.py --config config/config.yaml
+    deps:
+      - data/raw/ai_vs_human_text.csv
+      - src/data/ingest.py
+    params:
+      - data.raw_path
+
+  preprocess:
+    cmd: python3 src/data/preprocess.py --config config/config.yaml
+    deps:
+      - data/raw/ai_vs_human_text.csv
+      - src/data/preprocess.py
+    params:
+      - data.train_split
+      - data.val_split
+      - data.test_split
+      - data.random_state
+    outs:
+      - data/processed/train.parquet
+      - data/processed/val.parquet
+      - data/processed/test.parquet
+
+  train:
+    cmd: python3 src/models/train.py --config config/config.yaml
+    deps:
+      - data/processed/train.parquet
+      - data/processed/val.parquet
+      - src/models/train.py
+      - src/models/pytorch_model.py
+      - src/models/baseline_model.py
+    params:
+      - models.baseline
+      - models.pytorch_bilstm
+    outs:
+      - models/pytorch_bilstm.pt
+      - models/vocab.json
+      - models/baseline_model.pkl
+      - models/tfidf_vectorizer.pkl
+
+  evaluate:
+    cmd: python3 src/models/evaluate.py --config config/config.yaml
+    deps:
+      - data/processed/test.parquet
+      - models/pytorch_bilstm.pt
+      - models/baseline_model.pkl
+      - src/models/evaluate.py
+    metrics:
+      - reports/evaluation_report.json:
+          cache: false
+    plots:
+      - reports/confusion_matrix_pytorch.png:
+          cache: false
+      - reports/roc_curves_comparison.png:
+          cache: false
+
+  drift_detection:
+    cmd: python3 src/monitoring/drift_detector.py --config config/config.yaml
+    deps:
+      - data/processed/train.parquet
+      - data/processed/test.parquet
+      - src/monitoring/drift_detector.py
+    outs:
+      - reports/drift_report.json
+      - reports/drift_report.html

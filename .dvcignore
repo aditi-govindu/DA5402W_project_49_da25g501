@@ -1,0 +1,12 @@
+# DVC Ignore rules
+.git
+.venv
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+logs/
+.DS_Store
+mlruns/
