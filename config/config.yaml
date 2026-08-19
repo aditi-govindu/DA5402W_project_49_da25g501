@@ -1,9 +1,9 @@
-# Central Configuration for MLOps AI vs Human News Classification Pipeline
+# Team 49 - Central Configuration for the classification pipeline.
 
 project:
   name: "ai-vs-human-news-classification"
   version: "1.0.0"
-  description: "End-to-end MLOps pipeline for classifying news text as AI-generated or Human-written"
+  description: "End-to-end MLOps pipeline for classifying news text as AI-generated or Human-written by team 49."
 
 data:
   raw_path: "data/raw/ai_vs_human_text.csv"
@@ -14,7 +14,7 @@ data:
   target_col: "label"
   text_col: "text"
   id_col: "id"
-  train_split: 0.70
+  train_split: 0.70 # 70% train, 15% validation, 15% test split.
   val_split: 0.15
   test_split: 0.15
   random_state: 42

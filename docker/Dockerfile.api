@@ -1,4 +1,4 @@
-# Production Dockerfile for FastAPI AI vs Human News Classifier
+# Team 49's production dockerfile for FastAPI AI vs Human News Classifier.
 FROM python:3.9-slim
 
 WORKDIR /app

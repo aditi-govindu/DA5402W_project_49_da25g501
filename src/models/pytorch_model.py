@@ -18,11 +18,11 @@ from src.utils.logger import get_logger
 logger = get_logger("pytorch_model")
 
 class Vocabulary:
-    """Vocabulary mapping tokens to indices with special tokens handling."""
-    PAD_TOKEN = "<PAD>"  # idx 0
-    UNK_TOKEN = "<UNK>"  # idx 1
-    SOS_TOKEN = "<SOS>"  # idx 2
-    EOS_TOKEN = "<EOS>"  # idx 3
+    """Vocabulary mapping tokens to indices with special tokens handling for team 49."""
+    PAD_TOKEN = "<PAD>"  # idx 0 - padding
+    UNK_TOKEN = "<UNK>"  # idx 1 - unknown token
+    SOS_TOKEN = "<SOS>"  # idx 2 - start of stream
+    EOS_TOKEN = "<EOS>"  # idx 3 - end of stream
 
     def __init__(self, max_size: int = 10000, min_freq: int = 2):
         self.max_size = max_size
@@ -44,7 +44,7 @@ class Vocabulary:
         return tokens
 
     def build_vocab(self, texts: List[str]):
-        """Build vocabulary from list of text strings."""
+        """Build vocabulary from list of text strings. Limit is 10000."""
         counter = Counter()
         for text in texts:
             tokens = self.tokenize(text)

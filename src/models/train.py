@@ -1,5 +1,5 @@
 """
-Model Training & MLflow Experiment Tracking Orchestrator.
+Model Training & MLflow Experiment Tracking Orchestrator for team 49.
 Trains and compares:
 1. Baseline Statistical Model (TF-IDF + Logistic Regression)
 2. PyTorch Deep Learning Model (BiLSTM + Self-Attention)

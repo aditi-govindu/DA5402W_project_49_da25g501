@@ -1,5 +1,5 @@
 """
-Comprehensive Model Evaluation & Visualization Module.
+Comprehensive Model Evaluation & Visualization Module by team 49.
 Generates:
 - Confusion Matrix plots
 - ROC Curves comparison

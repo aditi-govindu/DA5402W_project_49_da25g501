@@ -1,4 +1,4 @@
-# Production Dockerfile for AI vs Human News Classifier Service
+# Production Dockerfile for AI vs Human News Classifier Service by team 49.
 FROM python:3.9-slim
 
 WORKDIR /app

@@ -1,5 +1,5 @@
 """
-Helper utilities for configuration loading, seed setting, and serialization.
+Helper utilities for configuration loading, seed setting, and serialization by team 49.
 """
 
 import os

@@ -1,5 +1,5 @@
 """
-Pydantic Data Schemas for FastAPI Endpoints.
+Pydantic Data Schemas for FastAPI Endpoints for team 49.
 """
 
 from typing import List, Dict, Any, Optional
@@ -14,6 +14,7 @@ class PredictRequest(BaseModel):
     )
 
 class LexicalFeatures(BaseModel):
+    """Heuristic features extracted from the text provided."""
     char_length: float
     word_count: float
     avg_word_length: float

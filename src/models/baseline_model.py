@@ -1,5 +1,5 @@
 """
-Baseline ML Model: TF-IDF + Logistic Regression / Random Forest / Naive Bayes.
+Baseline ML Model: TF-IDF + Logistic Regression.
 Serves as an interpretable statistical baseline for comparison against PyTorch deep learning.
 """
 

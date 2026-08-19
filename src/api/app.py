@@ -1,5 +1,5 @@
 """
-FastAPI Model Serving Application.
+FastAPI Model Serving Application by team 49 for MLOps.
 Provides RESTful endpoints for real-time inference, batch prediction, Prometheus metrics, and drift monitoring.
 """
 

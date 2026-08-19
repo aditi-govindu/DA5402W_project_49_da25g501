@@ -93,9 +93,9 @@ def task_model_validation_callable():
         print("Evaluation report not found.")
 
 default_args = {
-    "owner": "mlops-team",
+    "owner": "mlops-team-49",
     "depends_on_past": False,
-    "start_date": datetime(2025, 1, 1),
+    "start_date": datetime(2026, 8, 19),
     "email_on_failure": False,
     "email_on_retry": False,
     "retries": 1,
