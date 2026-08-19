@@ -51,3 +51,6 @@ data/processed/*.parquet
 models/*.pt
 models/*.pkl
 models/*.json
+
+# Keep empty directory structure
+!**/.gitkeep

@@ -13,11 +13,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy source code, configurations, and artifacts
+# Ensure directories exist
+RUN mkdir -p config src data models reports logs
+
+# Copy source code, configurations, data, and models
 COPY config/ config/
 COPY src/ src/
 COPY data/ data/
 COPY models/ models/
+
+# Install package in editable mode
+COPY setup.py .
+RUN pip install --no-cache-dir -e .
 
 # Expose FastAPI port
 EXPOSE 8000
