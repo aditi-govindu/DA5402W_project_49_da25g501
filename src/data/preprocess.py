@@ -4,8 +4,15 @@ Contains text cleaning, lexical feature extraction, tokenization, and dataset sp
 """
 
 import os
+import sys
 import re
 import argparse
+
+# Ensure repository root is on sys.path
+REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if REPO_ROOT not in sys.path:
+    sys.path.insert(0, REPO_ROOT)
+
 from typing import Dict, Any, Tuple
 import pandas as pd
 import numpy as np

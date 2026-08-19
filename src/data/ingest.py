@@ -4,7 +4,14 @@ Loads raw AI vs Human news article dataset, validates schema, and reports statis
 """
 
 import os
+import sys
 import argparse
+
+# Ensure repository root is on sys.path
+REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if REPO_ROOT not in sys.path:
+    sys.path.insert(0, REPO_ROOT)
+
 import pandas as pd
 from typing import Dict, Any, Tuple
 from src.utils.logger import get_logger
