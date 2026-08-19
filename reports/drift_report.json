@@ -4,7 +4,7 @@
     "overall_feature_drift": false,
     "feature_details": {
       "char_length": {
-        "ks_statistic": 0.05047619047619047,
+        "ks_statistic": 0.05047619047619045,
         "p_value": 0.7134408854945199,
         "drift_detected": false,
         "reference_mean": 523.8171428571428,
@@ -13,7 +13,7 @@
         "current_std": 44.50012645286514
       },
       "word_count": {
-        "ks_statistic": 0.049206349206349205,
+        "ks_statistic": 0.049206349206349254,
         "p_value": 0.7419759907889913,
         "drift_detected": false,
         "reference_mean": 66.86095238095238,
@@ -22,7 +22,7 @@
         "current_std": 8.004179155329876
       },
       "avg_word_length": {
-        "ks_statistic": 0.07301587301587302,
+        "ks_statistic": 0.07301587301587298,
         "p_value": 0.2638781350937172,
         "drift_detected": false,
         "reference_mean": 6.818494342444372,
@@ -31,7 +31,7 @@
         "current_std": 0.7026750382124778
       },
       "lexical_diversity": {
-        "ks_statistic": 0.08634920634920636,
+        "ks_statistic": 0.0863492063492064,
         "p_value": 0.11915552154748595,
         "drift_detected": false,
         "reference_mean": 0.9250597177725565,
@@ -49,7 +49,7 @@
         "current_std": 1.2909255938623607
       },
       "uppercase_ratio": {
-        "ks_statistic": 0.09079365079365079,
+        "ks_statistic": 0.09079365079365076,
         "p_value": 0.08870913520341255,
         "drift_detected": false,
         "reference_mean": 0.009668574684403486,
