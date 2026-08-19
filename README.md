@@ -28,7 +28,7 @@ This repository implements a **production-grade, end-to-end Machine Learning Ope
 
 | Expected deliverable | Tools used | Implementation Details |
 | :--- | :--- | :--- |
-| **Version Control** | Git & GitHub | Modular architecture, branch workflows, and clean commit history. |
+| **Version Control** | **Git & GitHub** | Modular architecture, branch workflows, and clean commit history. |
 | **Orchestration** | **Apache Airflow** | DAG: `mlops_ai_vs_human_classification_pipeline` executing end-to-end tasks with retries and dependency graphs. |
 | **Data Engineering** | **Apache Spark (PySpark)** | Distributed cleaning, tokenization (`RegexTokenizer`), stopword filtering (`StopWordsRemover`), lexical diversity (TTR), word length distributions. |
 | **Data Processing** | Python & Spark ML | Missing value imputation, URL/HTML sanitization, Type-Token Ratio, uppercase/punctuation densities, stratified train/val/test splitting. |
@@ -36,7 +36,7 @@ This repository implements a **production-grade, end-to-end Machine Learning Ope
 | **Experiment Tracking** | **MLflow** | Parameter tracking (LR, epochs, hidden dims), per-epoch metric curves (loss, accuracy, F1, ROC-AUC), model registry logging. |
 | **Data & Model Versioning**| **DVC** | `dvc.yaml` tracking stages (`ingest`, `preprocess`, `train`, `evaluate`, `drift_detection`). |
 | **Deployment** | **FastAPI & Docker** | Asynchronous REST API with Swagger UI docs, health checks, and Docker containerization. |
-| **Monitoring** | **Prometheus & Drift Detector**| Request count, latency histograms, prediction distribution counters, and Kolmogorov-Smirnov statistical data drift analysis. |
+| **Monitoring** | **Prometheus & Drift Detector**| Request count, latency histograms, prediction distribution counters, and `Kolmogorov-Smirnov (KS)` statistical data drift analysis. |
 | **CI/CD** | **GitHub Actions** | Automated linting (`black`, `flake8`), unit tests (`pytest`), pipeline validation dry run, and Docker image build test. |
 
 
