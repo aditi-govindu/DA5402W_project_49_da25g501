@@ -9,6 +9,7 @@ Logs metrics, parameters, and model artifacts to MLflow.
 import os
 import sys
 import argparse
+import copy
 
 # Ensure repository root is on sys.path
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
@@ -221,7 +222,9 @@ def train_pytorch_model(train_df: pd.DataFrame, val_df: pd.DataFrame, test_df: p
 
             if val_f1 > best_val_f1:
                 best_val_f1 = val_f1
-                best_model_state = model.state_dict()
+                # state_dict tensors reference the live model parameters; copy them so
+                # later training epochs cannot overwrite this best checkpoint.
+                best_model_state = copy.deepcopy(model.state_dict())
 
         # Load best model for test evaluation
         if best_model_state is not None:
